@@ -1,7 +1,7 @@
 import React from 'react';
 // import './App.css';
 // import fetchData from './Api.js';
-import ShowData from './ShowData';
+import ShowTournaments from './ShowTournaments';
 // import axios from 'axios';
 
 
@@ -21,7 +21,7 @@ function App() {
   return <>
   
     
-   <ShowData/>
+   <ShowTournaments/>
     </>
     
   

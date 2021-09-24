@@ -25,20 +25,25 @@ import axios from 'axios';
 
 
   
-  export const fetchMatches = (arrTournaments) =>{
+  export const fetchMatches = async (arrTournaments) =>{
+    console.log(arrTournaments)
     // console.log(arrTournaments);
-    arrTournaments.forEach(tournament => {
-     axios.get(`https://cp.fn.sportradar.com/common/en/Etc:UTC/gismo/fixtures_tournament/${tournament._tid}/2021`)
+    let newArr = await Promise.all(arrTournaments.map((tournament) => {
+    return axios.get(`https://cp.fn.sportradar.com/common/en/Etc:UTC/gismo/fixtures_tournament/${tournament._tid}/2021`)
     .then((response) =>{
      let tempArray = response.data.doc // return an array of object 
      let matchesArray  = tempArray.map((obj) => obj.data.matches) // iterates over array and getting object of with matches 
-     console.log(matchesArray)
-    // return JSON.stringify(matchesArray);
+    //  console.log(matchesArray)
+    tournament.matches = matchesArray;
+    console.log(tournament)
+    return tournament
   }).
   catch((error) => console.log(error))
       
-    });
-    return 'arrTournaments';
+    }))
+    console.log(newArr)
+    return JSON.stringify(newArr);
+
 };
 
 
