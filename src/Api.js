@@ -10,24 +10,14 @@ import axios from 'axios';
      const tournamentsArray = response.data.doc; 
      let tempArray  = tournamentsArray.map((obj) => obj.data.tournaments) // iterate over array and return tournaments
      tempArray = tempArray.reduce((a,b) => a.concat(b), []);              // flatten the array for comfortable use 
-     tempArray = tempArray.map((obj) => {
-       const {_tid, name, matches } = obj; 
-       return {_tid : obj._tid, name : obj.name}                          // return only properties that sre need for further work  
-     }) 
      return tempArray ;
   })
   .catch((error) => console.log(error)) 
   };
 
   
-  
-  
-
-
-  
+   
   export const fetchMatches = (tournamentID) =>{
-    
-    
     return axios.get(`https://cp.fn.sportradar.com/common/en/Etc:UTC/gismo/fixtures_tournament/${tournamentID}/2021`)
     .then((response) =>{
      let tempArray = response.data.doc // return an array of object 
@@ -35,10 +25,48 @@ import axios from 'axios';
     return matchesArray
     }).
   catch((error) => console.log(error))
-      
-   
 };
 
 
+// This function takes date and time value from every match and 
+// reassemble for proper construction of date object
 
+const dateConstructor = (date, time ) =>{
+  const splitDate = date.split('/'); // spletinng the date
+  const splitTime = time.split(':') // spliting the time 
+  const year = Number(splitDate[2] + 2000); //constructing a year 
+  const month = Number(splitDate[1] -1); // constructing month with 0 - index
+  const day = Number(splitDate[0]); // CONSTRUCTING Day
+  const hour = Number(splitTime[0]);
+  const minute = Number (splitTime[1]);
+
+  return new Date(year, month, day, hour, minute );
+
+
+
+
+}
+
+// This function Sort matches by date and time 
+
+
+export const sortMatches = (matchesArray) =>{
+  let matches = matchesArray.map(({...match}) =>{
+    return Object.values(match)})
+  matches =  matches.reduce((a,b) => a.concat(b), []);
+  matches = matches.sort((a, b) =>{ 
+
+    let dateA = dateConstructor(a.time.date, a.time.time),
+    dateB = dateConstructor(b.time.date, b.time.time);
+    if (dateB < dateA) {
+      return -1;
+    } else {
+      return 1;
+    }
+
+  });
+  console.log(matches)
+  return matches;
+
+}
   

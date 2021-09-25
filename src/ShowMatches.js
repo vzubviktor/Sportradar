@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {fetchMatches} from "./Api";
+import {fetchMatches, sortMatches} from "./Api";
 import ShowTournaments from "./ShowTournaments";
 
 
@@ -9,9 +9,8 @@ const ShowMatches = (props) =>{
 
 
     const getMatches = () =>{
-        fetchMatches(tournamentID).then((result) => {
+        fetchMatches(tournamentID).then((result) => {return sortMatches(result)}).then((result) => {
         setMatches(result)
-        console.log(result)
       })
         
         
@@ -24,12 +23,11 @@ const ShowMatches = (props) =>{
 
     
     return <>
-    {matches.map(({...match}) =>{
-       
-        const matchData = Object.values(match);
-       return matchData.map((match) =>{
-            return<div >{match.time.date} at {match.time.time}match teams: {match.teams.away.name} VS {match.teams.home.name}</div>
-        })
+    {matches.map((match) =>{
+        const {_id, comment, time, result, teams} = match;
+        return <div>
+        {match.time.date}, {match.time.time} {match.teams.home.name} VS {match.teams.away.name}
+       </div>
     })}
 
     </>
