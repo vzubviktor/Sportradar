@@ -1,5 +1,6 @@
-import {fetchMatches, fetchTournaments} from "./Api";
+import {fetchTournaments} from "./Api";
 import React, { useState, useEffect } from 'react';
+import ShowMatches from "./ShowMatches";
 
 
 
@@ -14,7 +15,6 @@ const [tournaments ,setTournaments] = useState([])
 const getTournaments = () =>{
     fetchTournaments().then((result) => {
     setTournaments(result)
-    console.log(result)
   })
     
     
@@ -26,12 +26,26 @@ useEffect(() => {
 
   return (
     <>
-    <ul>
+    
         {tournaments.map((tournament) => {
-          const {_tid, name} = tournament
-          return <li key = {_tid}> {name}</li>
+          const {_tid, name} = tournament 
+          return (<div key ={_tid} style  = 
+            {{
+            backgroundColor: "lightblue", 
+            textAlign: 'center', 
+            border: '5px outset',
+            height: 'auto', 
+            display: "flex",
+            flexDirection: "column",
+            
+            }}>
+             {name}
+                  <p><button type = 'button' >show last 5 matches</button></p>
+                  <div > <ShowMatches tournament ={tournament}/></div>
+            </div>)
+
         })}
-    </ul>
+    
     </>
   )
   
