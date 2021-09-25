@@ -56,7 +56,7 @@ export const sortMatches = (matchesArray) =>{
   matches =  matches.reduce((a,b) => a.concat(b), []);
   matches = matches.sort((a, b) =>{ 
 
-    let dateA = dateConstructor(a.time.date, a.time.time),
+    let dateA = dateConstructor(a.time.date, a.time.time), // 
     dateB = dateConstructor(b.time.date, b.time.time);
     if (dateB < dateA) {
       return -1;
@@ -66,7 +66,7 @@ export const sortMatches = (matchesArray) =>{
 
   });
   console.log(matches)
-  return matches;
+  return matches.slice(0, 5); // return last 5 matches
 
 }
   
