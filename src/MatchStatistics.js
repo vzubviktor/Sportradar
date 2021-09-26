@@ -27,11 +27,14 @@ const MatchStatistics = (props) =>{
 // Statistic component with proper comments. 
     const statistics = (match) =>{
         const uniqueID = match._id
-        let events = match.comment.split(',');
-        events = events.map((event) =>{
+        if (match.comment){
+            let events = match.comment.split(',');
+            events = events.map((event) =>{
             return <div key = {uniqueID + event}>{event}</div>
-        })
-        return events
+        });
+        return events;
+        }
+        else {return <div> Info Not Available</div>};
      }
     
      useEffect (() =>{
@@ -41,7 +44,7 @@ const MatchStatistics = (props) =>{
     return <>
     <div>
         <div>{title}</div>
-        <div><button type ='button' onClick ={() => setStatistic(statistics(match))}>Click to see result</button></div>
+        <div><button type ='button' onClick ={() => setStatistic(statistics(match))}>Click to see who scored</button></div>
         <div>{statistic}</div>
     </div>
    </>
