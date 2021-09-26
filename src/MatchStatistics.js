@@ -26,9 +26,10 @@ const MatchStatistics = (props) =>{
 // showing the statistics when button clicked. Showing result and 
 // Statistic component with proper comments. 
     const statistics = (match) =>{
+        const uniqueID = match._id
         let events = match.comment.split(',');
         events = events.map((event) =>{
-            return <div>{event}</div>
+            return <div key = {uniqueID + event}>{event}</div>
         })
         return events
      }
