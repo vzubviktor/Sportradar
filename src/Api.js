@@ -34,28 +34,28 @@ import axios from 'axios';
 const dateConstructor = (date, time ) =>{
   const splitDate = date.split('/'); // spletinng the date
   const splitTime = time.split(':') // spliting the time 
-  const year = Number(splitDate[2] + 2000); //constructing a year 
-  const month = Number(splitDate[1] -1); // constructing month with 0 - index
+  const year = Number(splitDate[2]) + 2000; //constructing a year 
+  const month = Number(splitDate[1]) -1; // constructing month with 0 - index
   const day = Number(splitDate[0]); // CONSTRUCTING Day
   const hour = Number(splitTime[0]);
   const minute = Number (splitTime[1]);
 
   return new Date(year, month, day, hour, minute );
-
-
-
-
 }
+
+
+
 
 // This function Sort matches by date and time 
 
 
 export const sortMatches = (matchesArray) =>{
+  // getting array of object 
   let matches = matchesArray.map(({...match}) =>{
     return Object.values(match)})
   matches =  matches.reduce((a,b) => a.concat(b), []);
+  //sorting matches by date and time 
   matches = matches.sort((a, b) =>{ 
-
     let dateA = dateConstructor(a.time.date, a.time.time), // 
     dateB = dateConstructor(b.time.date, b.time.time);
     if (dateB < dateA) {
@@ -63,10 +63,14 @@ export const sortMatches = (matchesArray) =>{
     } else {
       return 1;
     }
-
   });
-  console.log(matches)
-  return matches.slice(0, 5); // return last 5 matches
+  // filtering by today's date to get only matches that has been played
+  const today = new Date();
+  matches = matches.filter((match) =>{
+      const matchDate =  dateConstructor(match.time.date, match.time.time);
+      return matchDate < today
+  })
+  return matches.slice(0, 5) // return last 5 matches
 
 }
   
