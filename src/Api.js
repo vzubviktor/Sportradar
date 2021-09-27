@@ -37,7 +37,7 @@ import axios from 'axios';
 // This function takes date and time value from every match and 
 // reassemble for proper construction of date object
 
-const dateConstructor = (date, time ) =>{
+export const dateConstructor = (date, time ) =>{
   if(date && time) {
     const splitDate = date.split('/'); // spletinng the date
     const splitTime = time.split(':') // spliting the time 
