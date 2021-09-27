@@ -34,7 +34,7 @@ const MatchStatistics = (props) =>{
         });
         return events;
         }
-        else {return <div> Info Not Available</div>};
+        else {return <div className = 'unknown'> Info Not Available</div>};
      }
     
      useEffect (() =>{
@@ -43,9 +43,9 @@ const MatchStatistics = (props) =>{
 
     return <>
     <div>
-        <div>{title}</div>
-        <div><button type ='button' onClick ={() => setStatistic(statistics(match))}>Click to see who scored</button></div>
-        <div>{statistic}</div>
+        <div className = 'h5'>{title}</div>
+        <div><button className = 'btn btn-secondary' type ='button' onClick ={() => setStatistic(statistics(match))}>Click to see who scored</button></div>
+        <div className = 'h6'>{statistic}</div>
     </div>
    </>
 

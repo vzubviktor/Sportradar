@@ -32,16 +32,8 @@ useEffect(() => {
             role = 'tournament' 
             id = {_tid}
             data-testid = {_tid} 
-            style  = {{
-            backgroundColor: "lightblue", 
-            textAlign: 'center', 
-            border: '5px outset',
-            height: 'auto', 
-            display: "flex",
-            flexDirection: "column",
-            
-            }}>
-             <div>{name}</div>
+            className = 'container themed-container'>
+             <div className = 'h4'>{name}</div>
              <div > <ShowMatches tournament ={tournament}/></div>
             </div>)
 

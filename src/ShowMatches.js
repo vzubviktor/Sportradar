@@ -14,7 +14,7 @@ const ShowMatches = (props) =>{
         .then((result) => setMatches(result)) // showing the result
      }
       return <>
-    <p><button type = 'button' onClick ={() => getMatches()} >show last 5 matches</button></p>
+    <p><button className = 'btn btn-primary' type = 'button' onClick ={() => getMatches()} >show last 5 matches</button></p>
     {matches.map((match) =>{
         const {_id} = match;
         return <div key = {match._id}>
