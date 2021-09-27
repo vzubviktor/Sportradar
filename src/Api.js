@@ -4,8 +4,8 @@ import axios from 'axios';
  Returns flattened  array of objects with property 'tournaments', with filtered keys
  that will be used to get list of  matches. Or cathes an Error */  
 
- export const fetchTournaments = () => {
-  return axios.get('https://cp.fn.sportradar.com/common/en/Etc:UTC/gismo/config_tournaments/1/17')
+ export const fetchTournaments = async () => {
+  return await axios.get('https://cp.fn.sportradar.com/common/en/Etc:UTC/gismo/config_tournaments/1/17')
   .then((response) => {
      const tournamentsArray = response.data.doc; 
      let tempArray  = tournamentsArray.map((obj) => {

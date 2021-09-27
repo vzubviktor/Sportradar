@@ -10,14 +10,17 @@ import ShowMatches from "./ShowMatches";
 const ShowTournaments = () =>{
 const [tournaments ,setTournaments] = useState([])
 
-const getTournaments = () =>{
+
+
+useEffect(() => {
+  let mounted = true
+  const getTournaments = () =>{
     fetchTournaments().then((result) => {
     setTournaments(result)
   })
 }
-
-useEffect(() => {
   getTournaments();
+  return () => {mounted = false};
 }, []);
 
   return (
@@ -25,7 +28,11 @@ useEffect(() => {
     
         {tournaments.map((tournament) => {
           const {_tid, name} = tournament 
-          return (<div key ={_tid} style  = {{
+          return (<div key ={_tid}
+            role = 'tournament' 
+            id = {_tid}
+            data-testid = {_tid} 
+            style  = {{
             backgroundColor: "lightblue", 
             textAlign: 'center', 
             border: '5px outset',
