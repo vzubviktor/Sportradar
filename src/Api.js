@@ -18,7 +18,9 @@ import axios from 'axios';
   .catch((error) => console.log(error)) 
   };
 
-  
+  /* This function fecthes the array of all macthes
+  within every tournament by tournament ID (_tid) property.
+  Fetches from URL given in the Task*/ 
    
   export const fetchMatches = (tournamentID) =>{
     return axios.get(`https://cp.fn.sportradar.com/common/en/Etc:UTC/gismo/fixtures_tournament/${tournamentID}/2021`)
@@ -34,8 +36,8 @@ import axios from 'axios';
 };
 
 
-// This function takes date and time value from every match and 
-// reassemble for proper construction of date object
+/* This function takes date and time value from every match and 
+ reassemble for proper construction of date object*/
 
 export const dateConstructor = (date, time ) =>{
   if(date && time) {
@@ -51,7 +53,10 @@ export const dateConstructor = (date, time ) =>{
 }
 
 
-// This function Sort matches by date and time 
+/* This function Sort matches by date and time. Pulls up
+date and play time properties from match Objects, uses dateConstructor to
+create proper date objects, sorting by date then uses today's date
+to filter matches that has been played and return last 5*/ 
 
 
 export const sortMatches = (matchesArray) =>{

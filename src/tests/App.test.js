@@ -22,7 +22,7 @@ it('renders without crashing', () => {
 
 it('check if  components recieve true values from source code', async () =>{
   render(<App />);
-  const listNode =   await screen.findAllByRole('tournament')
+  const listNode =   await screen.findAllByTestId('tournament')
    expect(listNode).toBeTruthy();
 });
 

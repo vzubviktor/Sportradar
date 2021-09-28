@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import {fetchMatches, sortMatches} from "./Api";
-import ShowTournaments from "./ShowTournaments";
 import MatchStatistics from "./MatchStatistics";
 
+/*Renderes last 5 matches in givent tournament
+and display last 5 sorted by date and play time*/
 
 const ShowMatches = (props) =>{
     const tournamentID = props.tournament._tid;
@@ -14,10 +15,10 @@ const ShowMatches = (props) =>{
         .then((result) => setMatches(result)) // showing the result
      }
       return <>
-    <p><button className = 'btn btn-primary' type = 'button' onClick ={() => getMatches()} >show last 5 matches</button></p>
-    {matches.map((match) =>{
+        <p><button className = 'btn btn-primary' type = 'button' onClick ={() => getMatches()} >show last 5 matches</button></p>
+        {matches.map((match) =>{
         const {_id} = match;
-        return <div key = {match._id}>
+        return <div key = {_id}>
         <MatchStatistics match = {match}/>
        </div>
     })}

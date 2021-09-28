@@ -7,7 +7,7 @@ import React, {useState, useEffect} from "react";
 
 
 const MatchStatistics = (props) =>{
-    const {_id, comment, time, result, teams} = props.match;
+    
     const match = props.match;
     const [statistic, setStatistic] = useState('');
     const [title, setTitle] = useState('')
@@ -15,18 +15,16 @@ const MatchStatistics = (props) =>{
     const playTime = match.time.time;
     const teamHome = match.teams.home.name;
     const teamAway = match.teams.away.name;
-    const resultHome = match.result.home
-    const resultAway = match.result.away
+    const resultHome = match.result.home;
+    const resultAway = match.result.away;
 
     
 // setting the title
-    const getTitle = (match) =>{
-        setTitle(` Date : ${date}, ${teamHome}   ${resultHome}:${resultAway}   ${teamAway}, ${playTime}`)
-    }
+    
 // showing the statistics when button clicked. Showing result and 
 // Statistic component with proper comments. 
     const statistics = (match) =>{
-        const uniqueID = match._id
+        const uniqueID = match._id;
         if (match.comment){
             let events = match.comment.split(',');
             events = events.map((event) =>{
@@ -38,8 +36,12 @@ const MatchStatistics = (props) =>{
      }
     
      useEffect (() =>{
-        getTitle(match)
-    }, [])
+        const getTitle = () =>{
+        setTitle(` Date : ${date}, ${teamHome}   ${resultHome}:${resultAway}   ${teamAway}, ${playTime}`)
+        };
+        getTitle();
+
+    },[date, playTime, resultAway,resultHome, teamAway, teamHome]);
 
     return <>
     <div>
@@ -47,8 +49,8 @@ const MatchStatistics = (props) =>{
         <div><button className = 'btn btn-secondary' type ='button' onClick ={() => setStatistic(statistics(match))}>Click to see who scored</button></div>
         <div className = 'h6'>{statistic}</div>
     </div>
-   </>
+   </>;
 
-}
+};
 
 export default MatchStatistics;
