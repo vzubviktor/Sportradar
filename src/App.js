@@ -1,10 +1,10 @@
 import React from 'react';
-import ShowTournaments from './ShowTournaments';
+import ShowTournaments from './components/ShowTournaments';
 
 function App() {
   
   return <>
-     <ShowTournaments/>
+     <ShowTournaments />
     </>
   }
 

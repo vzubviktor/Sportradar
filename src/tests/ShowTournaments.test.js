@@ -1,8 +1,8 @@
 import { render, screen, container, cleanup, findByText } from '@testing-library/react';
-import ShowTournaments from '../ShowTournaments';
-import {fetchTournaments} from "../Api";
+import ShowTournaments from '../components/ShowTournaments';
+import {fetchTournaments} from "../components/Api";
 import React, { useState, useEffect } from 'react';
-import ShowMatches from "../ShowMatches";
+import ShowMatches from "../components/ShowMatches";
 import ReactDOM from 'react-dom';
 
 
@@ -12,8 +12,4 @@ it('renders without crashing', () => {
 
 });
 
-// it('check if  components recieve true values from source code', async () =>{
-//   render(<ShowMatches tournament ={tournament}/>);
-//   const listNode =   await screen.findAllByRole('tournament')
-//    expect(listNode).toBeTruthy();
-// });
+

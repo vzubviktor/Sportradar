@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {fetchTournaments, fetchMatches, dateConstructor} from "../Api";
+import {fetchTournaments, fetchMatches, dateConstructor} from "../components/Api";
 
 
  // testing fetchTournaments() to receive an array of objects
