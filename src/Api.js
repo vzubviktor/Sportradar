@@ -9,9 +9,8 @@ import axios from 'axios';
   .then((response) => {
      const tournamentsArray = response.data.doc; 
      let tempArray  = tournamentsArray.map((obj) => {
-       if(obj.data.tournaments){
-         return obj.data.tournaments;// check if tournament exists
-       }}) // iterate over array and return tournaments
+       return obj.data.tournaments;  // iterate over array and return tournaments
+      })
      tempArray = tempArray.reduce((a,b) => a.concat(b), []);              // flatten the array for comfortable use 
      return tempArray ;
   })
@@ -27,12 +26,11 @@ import axios from 'axios';
     .then((response) =>{
      let tempArray = response.data.doc // return an array of object 
      let matchesArray  = tempArray.map((obj) => {
-       if(obj.data.matches){
-         return obj.data.matches;// check if matches info exists
-       }}) // iterates over array and getting object of with matches 
+        return obj.data.matches; // iterates over array and getting object of with matches 
+       }) 
     return matchesArray
-    }).
-  catch((error) => console.log(error))
+    })
+    .catch((error) => console.log(error))
 };
 
 

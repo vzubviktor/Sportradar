@@ -19,7 +19,7 @@ const MatchStatistics = (props) =>{
     const resultAway = match.result.away;
 
     
-// setting the title
+
     
 // showing the statistics when button clicked. Showing result and 
 // Statistic component with proper comments. 
